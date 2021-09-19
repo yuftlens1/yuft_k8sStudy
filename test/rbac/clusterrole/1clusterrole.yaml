@@ -1,0 +1,11 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: monitoring
+  labels:
+    rbac.example.com/aggregate-to-test-aggregation: "true"
+# 当你创建 "monitoring" ClusterRole 时，下面的规则会被添加到 "monitoring" ClusterRole 中
+rules:
+- apiGroups: [""]
+  resources: ["services", "endpoints", "pods"]      #所授权的资源
+  verbs: ["get", "list", "watch"]                                #对所授权资源能执行的动作

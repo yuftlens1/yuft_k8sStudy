@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1beta1          #1.19以后建议使用这个!
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: "nginx"          #申明使用的ingress是ingress-nginx的，不是traefik或者其他的!
+  name: example
+spec:
+  rules:                                                            #一个ingress可以配置多个rules，也就是说一个ingress可以配置多个域名!
+  - host: rewrite.bar.com                                #域名配置，可以不写，就匹配*全部域名。!!!也可以写成*.bar.com这样!!!
+    http:
+      paths:                                                       # 相当于nginx的location配置！一个host可以配置多个path，就转发到多个svc上!或者不同的路径上!
+      - backend:
+          serviceName: nginx                       #代理到那个svc上!!!!!!!
+          servicePort: 8080
+        path: /

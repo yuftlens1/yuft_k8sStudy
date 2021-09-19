@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tolerationsequal
+  labels:
+    env: test
+  namespace: default
+spec:
+  containers:
+  - name: nginx-tolerationsequal
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    ssd: "true"
+  tolerations:
+   - key: "ssd"
+     operator: "Equal"                #完全匹配，严格匹配
+     value: "true"
+     effect: "NoExecute"
+   - key: "ssdd"
+     operator: "Equal"
+     value: "true"
+     effect: "NoExecute"
+   - key: "ssd"
+     operator: "Equal"
+     value: "true"
+     effect: "NoSchedule"
+   - key: "ssdd"
+     operator: "Equal"
+     value: "true"
+     effect: "NoSchedule"

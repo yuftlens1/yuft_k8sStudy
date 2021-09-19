@@ -1,0 +1,9 @@
+- serverName: 'study'
+  serverAddress: 'https://192.168.163.236:8443'
+  #serverAdminUser: 'xxx'
+  #serverAdminPassword: 'xxx#'
+  serverAdminToken: 'null'
+  serverDashboardUrl: "https://192.168.163.111:30162/#"
+  production: 'false'
+  kubeConfigPath: "/mnt/study.config" 
+  harborConfig: "HarborUrl, HarborUsername, HarborPassword, HarborEmail"

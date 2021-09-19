@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: nginx-svc-test
+  name: nginx-svc-test
+spec:
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:               #svc自己的端口和后端pod的端口
+  - name: http           #这组端口转发的名称
+    port: 80             #svc自己的端口
+    protocol: TCP        #协议，支持TCP\UDP\SCTP,默认TCP
+    targetPort: 80       #目标pod的端口
+  - name: https
+    port: 446
+    protocol: TCP
+    targetPort: 443
+  selector:           #选择后端的pod!  pod控制器也是通过selector来选择控制的pod
+    app: nginxtest-ds-pod
+  sessionAffinity: None
+  type: ClusterIP
+#status:
+#  loadBalancer: {}

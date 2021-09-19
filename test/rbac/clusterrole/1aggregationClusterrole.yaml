@@ -1,0 +1,9 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: test-aggregation
+aggregationRule:
+  clusterRoleSelectors:
+  - matchLabels:
+      rbac.example.com/aggregate-to-test-aggregation: "true"    #聚合有该label的clusterrole
+rules: [] # Rules are automatically filled in by the controller manager.

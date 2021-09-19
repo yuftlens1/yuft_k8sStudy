@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dp-cm-conf-mount
+  name: dp-cm-conf-mount
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dp-cm-conf
+  template:
+    metadata:
+      labels:
+        app: dp-cm-conf
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        volumeMounts:                
+          - name: 11config-volume      #挂载下面的volumes
+            mountPath: /etc/config     #挂载到pod里的/etc/config目录下
+
+      volumes:
+        - name: 11config-volume
+          configMap:
+            name: test               #test是一个cm配置资源
+            items:
+              - key: game1.conf
+                path: game1rename.conf
+                mode: 0644
+
+              - key: game2.conf
+                path: game2rename.conf
+            defaultMode: 0666

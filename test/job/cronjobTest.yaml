@@ -1,0 +1,43 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  labels:
+    run: hello_in_CronJob
+  name: hello
+  namespace: default
+spec:
+  concurrencyPolicy: Allow #并发调度策略：Allow运行同时运行过个任务。
+                                                                # Forbid：不运行并发执行。
+                                                                # Replace：替换之前的任务
+  failedJobsHistoryLimit: 1 # 保留失败的任务数。
+  jobTemplate:
+    metadata:
+      creationTimestamp: null
+    spec:
+      template:
+        metadata:
+          creationTimestamp: null
+          labels:
+            run: hello_In_jobTemplate
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -c
+            - date ; echo 'ewqewq'
+            image: nginx
+            imagePullPolicy: IfNotPresent
+            name: hello
+            resources: {}
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+          dnsPolicy: ClusterFirst
+          restartPolicy: OnFailure
+          schedulerName: default-scheduler
+          securityContext: {}
+          terminationGracePeriodSeconds: 30
+  schedule: '*/1 * * * *'        #调度的策略 分时日月周
+  successfulJobsHistoryLimit: 3  # 成功的Job保留的次数
+  suspend: false                 # 挂起，true：cronjob不会被执行。
+status: {}
+

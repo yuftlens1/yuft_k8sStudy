@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: hpa-nginx
+  name: hpa-nginx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hpa-nginx
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: hpa-nginx
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        resources: 
+          requests:
+            cpu: 10m
+status: {}

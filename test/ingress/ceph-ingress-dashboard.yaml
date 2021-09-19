@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ceph-dashboard
+  namespace: rook-ceph
+spec:
+  rules:
+  - host: ceph.dashboard.com
+    http:
+      paths:
+      - backend:
+          serviceName: rook-ceph-mgr-dashboard
+          servicePort: 7000
+        path: /

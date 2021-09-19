@@ -1,0 +1,10 @@
+#k8s资源访问外部资源的代理口,用逆向思维来考虑...比如pod容器访问其他服务器的web,就访问这个svc...
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: nginx-svc-externalname
+  name: nginx-svc-externalname
+spec:
+  type: ExternalName
+  externalName: www.baidu.com               #集群外的域名!!!

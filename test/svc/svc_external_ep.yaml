@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Endpoints
+metadata:
+  labels:
+    app: nginx-svc-external          #ep名称需要和对应的svc名称一致!!!
+  name: nginx-svc-external           #ep名称需要和对应的svc名称一致!!!
+subsets:
+- addresses:
+  - ip: 103.235.46.39
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: dpnginx-storageclassfilesystem-pvc
+  name: dpnginx-storageclassfilesystem-pvc
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dpnginx-storageclassfilesystem-pvc
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: dpnginx-storageclassfilesystem-pvc
+    spec:
+      containers:
+      - image: nginx
+        name: nginx
+        volumeMounts:
+        - name: pvc-sc-fs
+          mountPath: /usr/share/nginx/html
+      volumes:
+        - name: pvc-sc-fs
+          persistentVolumeClaim:
+            claimName: rook-ceph-pvc-sc-fs
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: rook-ceph-pvc-sc-fs
+spec:
+  accessModes:
+    - ReadWriteMany
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: rook-cephfs

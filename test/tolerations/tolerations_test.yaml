@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tolerations
+  labels:
+    env: test
+  namespace: default
+spec:
+  containers:
+  - name: nginx-tolerations
+    image: nginx
+    imagePullPolicy: IfNotPresent
+  nodeSelector:
+    ssd: "true"
+  tolerations:         #不完全匹配；宽松匹配
+  - key: "ssd"
+    operator: "Exists"   #不完全匹配；宽松匹配
+  - key: "ssdd"
+    operator: "Exists"
