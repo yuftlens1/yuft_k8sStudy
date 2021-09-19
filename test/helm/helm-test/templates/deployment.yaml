@@ -4,6 +4,8 @@ metadata:
   name: {{ include "helm-test.fullname" . }}
   labels:
     {{- include "helm-test.labels" . | nindent 4 }}
+    test_neizhi_bianliang_chart: {{ .Chart.Name }}
+    ewq: {{.Chart.Description}}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
