@@ -6,6 +6,7 @@ metadata:
     {{- include "helm-test.labels" . | nindent 4 }}
     test_neizhi_bianliang_chart: {{ .Chart.Name }}
     ewq: {{.Chart.Description}}
+    test_hanshu: {{ .Values.hanshu_trimall | trimAll "x" | upper }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
