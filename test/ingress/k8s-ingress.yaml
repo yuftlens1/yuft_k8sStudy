@@ -10,5 +10,5 @@ spec:
       paths:
       - backend:
           serviceName: kubernetes-dashboard
-          servicePort: 30162
+          servicePort: 30243
         path: /
